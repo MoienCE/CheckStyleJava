@@ -22,8 +22,10 @@ public class Main {
         MethodNameChecking.main(fileName);
 
         //****(variable name checking)*****//
+        VariableNameChecking.main(fileName);
 
-
+        //*****(indentation checking)******//
+        IndentationChecking.main(fileName);
 
     }
 }

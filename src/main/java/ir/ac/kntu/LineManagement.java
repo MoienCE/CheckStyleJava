@@ -1,11 +1,12 @@
 package ir.ac.kntu;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LineManagement {
     public static String removeInitialSpace(String line) {
-        String removedInitialSpace = "";
+        String removedInitialSpace = line;
         Pattern p = Pattern.compile("^[ ]+");
         Matcher m = p.matcher(line);
 
@@ -20,5 +21,12 @@ public class LineManagement {
         methodName = line.replaceAll(" +[A-Za-z]+ [A-Za-z]+ [A-Za-z]+ ", "");
         methodName = methodName.replaceAll("[^A-Za-z0-9].*", "");
         return methodName;
+    }
+
+    public static String variableNameExtractor(String line) {
+        String variableName;
+        variableName = line.replaceAll("^[a-zS]+ ", "");
+        variableName = variableName.replaceAll("[ =].*", "");
+        return variableName;
     }
 }

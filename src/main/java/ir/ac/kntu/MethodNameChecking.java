@@ -34,17 +34,20 @@ public class MethodNameChecking {
             String line = reader.readLine();
 
             while (line != null) {
-                Pattern p = Pattern.compile("[A-Za-z]+ [A-Za-z]+ [A-Za-z]+ [A-Za-z]+");
+                Pattern p = Pattern.compile("public static [A-Za-z]+ [A-Za-z]+");
                 Matcher m = p.matcher(line);
                 if (m.find())
                 {
                     methodName = LineManagement.methodNameExtractor(line);
                     if (methodName.length() < 2)
+                    {
                         printSmall();
-                    p = Pattern.compile("^[a-z]+[A-Za-z0-9]+");
-                    m = p.matcher(methodName);
-                    if (!m.find())
+                        return;
+                    }
+                    if (!methodName.matches("^[a-z]+[A-Za-z0-9]+"))
+                    {
                         printNotCase();
+                    }
                 }
 
                 line = reader.readLine();
