@@ -9,6 +9,7 @@ public class SizeChecking {
 
     public static void print(){
         switch (lineNumber) {
+            case 1 -> System.out.println(lineNumber + "st line: what a big line! more than 80 characters!!");
             case 2 -> System.out.println(lineNumber + "nd line: what a big line! more than 80 characters!!");
             case 3 -> System.out.println(lineNumber + "rd line: what a big line! more than 80 characters!!");
             default -> System.out.println(lineNumber + "th line: what a big line! more than 80 characters!!");

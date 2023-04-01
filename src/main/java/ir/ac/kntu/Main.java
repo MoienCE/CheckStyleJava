@@ -18,5 +18,12 @@ public class Main {
         //*******(class name checking)*******//
         ClassNameChecking.main(fileName);
 
+        //******(method name checking)******//
+        MethodNameChecking.main(fileName);
+
+        //****(variable name checking)*****//
+
+
+
     }
 }
