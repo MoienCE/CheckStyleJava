@@ -25,6 +25,12 @@ public class CommandCounter {
             String line = reader.readLine();
 
             while (line != null) {
+                if (line.trim().startsWith("for")){
+                    line = reader.readLine();
+                    lineNumber++;
+                    number = 0;
+                    continue;
+                }
                 for(int i = 0; i < line.length(); i++) {
                     if(line.charAt(i) == ';')
                         number++;

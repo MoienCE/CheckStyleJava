@@ -7,25 +7,33 @@ public class Main {
         String fileName = scanner.nextLine();
 
         //*********(package checking)*********//
+        System.out.print("package calling WARNINGS:\n");
         PackageFinder.main(fileName);
 
         //*********(command counter)*********//
+        System.out.print("\n--------------------------\n");
+        System.out.print("command counting WARNINGS:\n");
         CommandCounter.main(fileName);
 
         //**********(size checking)**********//
+        System.out.print("\n---------------------\n");
+        System.out.print("line length WARNINGS:\n");
         SizeChecking.main(fileName);
 
-        //*******(class name checking)*******//
-        ClassNameChecking.main(fileName);
-
-        //******(method name checking)******//
-        MethodNameChecking.main(fileName);
-
-        //****(variable name checking)*****//
-        VariableNameChecking.main(fileName);
+        //************(name checking)***********//
+        System.out.print("\n----------------\n");
+        System.out.print("naming WARNINGS:\n");
+        NameChecking.main(fileName);
 
         //*****(indentation checking)******//
+        System.out.print("\n---------------------\n");
+        System.out.print("indentation WARNINGS:\n");
         IndentationChecking.main(fileName);
+
+        //******(loop form checking)******//
+        System.out.print("\n---------------------\n");
+        System.out.print("loop stile WARNINGS:\n");
+        LoopStileChecking.main(fileName);
 
     }
 }
