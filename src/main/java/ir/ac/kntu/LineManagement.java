@@ -11,7 +11,7 @@ public class LineManagement {
 
     public static String variableNameExtractor(String line) {
         String variableName;
-        variableName = line.trim().replaceAll("^[a-zS]+ ", "");
+        variableName = line.trim().replaceAll("^[a-z\\[\\]A-Z]+ ", "");
         variableName = variableName.replaceAll("[ =].*", "");
         return variableName;
     }

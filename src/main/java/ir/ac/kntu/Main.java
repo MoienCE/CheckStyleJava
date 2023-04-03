@@ -40,5 +40,10 @@ public class Main {
         System.out.print("condition stile WARNINGS:\n");
         ConditionStileChecking.main(fileName);
 
+        //*****(switch stile checking)*****//
+        System.out.print("\n---------------------\n");
+        System.out.print("switch-case stile WARNINGS:\n");
+        switchCaseChecking.main(fileName);
+
     }
 }

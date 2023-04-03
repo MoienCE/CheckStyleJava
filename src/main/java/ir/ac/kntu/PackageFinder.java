@@ -23,6 +23,13 @@ public class PackageFinder {
             String line = reader.readLine();
 
             while (line != null) {
+                line = line.replaceAll("\".*\"", "");
+                line = line.replaceAll("'.'", "");
+                if (line.trim().startsWith("//")) {
+                    line = reader.readLine();
+                    lineNumber++;
+                    continue;
+                }
                 if (line.startsWith("package") && lineNumber != 1)
                 {
                     packageFound = true;

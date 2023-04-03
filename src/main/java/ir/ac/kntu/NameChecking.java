@@ -40,6 +40,13 @@ public class NameChecking {
             String line = reader.readLine();
 
             while (line != null) {
+                line = line.replaceAll("\".*\"", "");
+                line = line.replaceAll("'.'", "");
+                if (line.trim().startsWith("//")) {
+                    line = reader.readLine();
+                    lineNumber++;
+                    continue;
+                }
                 methodMatcher = methodPattern.matcher(line);
                 if (line.trim().startsWith("public class")) { //********(class?)********//
                     int j = 13;
@@ -54,8 +61,7 @@ public class NameChecking {
                     if (!className.matches("[A-Z][a-zA-Z0-9].*")) {
                         classPrintNotCase();
                     }
-                }
-                else if (methodMatcher.find()) { //********(method?)********//
+                } else if (methodMatcher.find()) { //********(method?)********//
                     methodName = LineManagement.methodNameExtractor(line);
                     if (methodName.length() < 2) {
                         methodPrintSmall();
@@ -64,8 +70,7 @@ public class NameChecking {
                     if (!methodName.matches("^[a-z]+[A-Za-z0-9]+")) {
                         methodPrintNotCase();
                     }
-                }
-                else if (line.trim().startsWith("int")
+                } else if (line.trim().startsWith("int")
                         || line.trim().startsWith("double")
                         || line.trim().startsWith("byte")
                         || line.trim().startsWith("long")

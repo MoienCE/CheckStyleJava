@@ -59,6 +59,13 @@ public class ConditionStileChecking {
             String line = reader.readLine();
 
             while (line != null) {
+                line = line.replaceAll("\".*\"", "");
+                line = line.replaceAll("'.'", "");
+                if (line.trim().startsWith("//")) {
+                    line = reader.readLine();
+                    lineNumber++;
+                    continue;
+                }
 
                 //*****(If Stile Checking)*****//
                 finIfMatcher = findIfPattern.matcher(line.trim());
