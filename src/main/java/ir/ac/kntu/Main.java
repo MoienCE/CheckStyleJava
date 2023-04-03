@@ -30,10 +30,15 @@ public class Main {
         System.out.print("indentation WARNINGS:\n");
         IndentationChecking.main(fileName);
 
-        //******(loop form checking)******//
+        //******(loop stile checking)******//
         System.out.print("\n---------------------\n");
         System.out.print("loop stile WARNINGS:\n");
         LoopStileChecking.main(fileName);
+
+        //****(condition stile checking****//
+        System.out.print("\n---------------------\n");
+        System.out.print("condition stile WARNINGS:\n");
+        ConditionStileChecking.main(fileName);
 
     }
 }
