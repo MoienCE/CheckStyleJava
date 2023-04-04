@@ -1,14 +1,10 @@
 package ir.ac.kntu;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 public class CommandCounter {
     private static int lineNumber = 1;
     private static int number = 0;
-
-
     public static void print() {
         switch (lineNumber) {
             case 1 -> System.out.println("1st line: " + number + " commands in one line");
@@ -17,7 +13,6 @@ public class CommandCounter {
             default -> System.out.println(lineNumber + "th line: " + number + " commands in one line");
         }
     }
-
     public static void main(String fileName) {
         BufferedReader reader;
         try {
