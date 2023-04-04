@@ -36,8 +36,7 @@ public class LoopStileChecking {
                 }
                 if (line.trim().startsWith("while")) {
                     whileCheck(line);
-                }
-                else if (line.trim().startsWith("for")) {
+                } else if (line.trim().startsWith("for")) {
                     forCheck(line);
                 }
                 line = reader.readLine();
@@ -48,7 +47,8 @@ public class LoopStileChecking {
             e.printStackTrace();
         }
     }
-    public static void whileCheck(String line){
+
+    public static void whileCheck(String line) {
         int i = 0;
         while (line.trim().charAt(i) != '{') {
             i++;
@@ -59,11 +59,13 @@ public class LoopStileChecking {
         } else {
             Pattern p = Pattern.compile("while ?\\(.+\\) ?\\{");
             Matcher m = p.matcher(line);
-            if (!m.find())
+            if (!m.find()) {
                 print();
+            }
         }
     }
-    public static void forCheck(String line){
+
+    public static void forCheck(String line) {
         int i = 0;
         while (line.trim().charAt(i) != '{') {
             i++;
@@ -74,8 +76,9 @@ public class LoopStileChecking {
         } else {
             Pattern p = Pattern.compile("for ?\\(.+\\) ?\\{");
             Matcher m = p.matcher(line);
-            if (!m.find())
+            if (!m.find()) {
                 print();
+            }
         }
     }
 }

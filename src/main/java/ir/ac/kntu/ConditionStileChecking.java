@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class ConditionStileChecking {
 
     private static int lineNumber = 1;
+
     public static void printIf() {
         switch (lineNumber) {
             case 1 -> System.out.println(lineNumber + "st line: The shape of the IF is not regular");
@@ -20,26 +21,35 @@ public class ConditionStileChecking {
 
     public static void printElseIf() {
         switch (lineNumber) {
-            case 1 -> System.out.println(lineNumber + "st line: The shape of the ELSE-IF is not regular");
-            case 2 -> System.out.println(lineNumber + "nd line: The shape of the ELSE-IF is not regular");
-            case 3 -> System.out.println(lineNumber + "rd line: The shape of the ELSE-IF is not regular");
-            default -> System.out.println(lineNumber + "th line: The shape of the ELSE-IF is not regular");
+            case 1 -> System.out.println(lineNumber +
+                    "st line: The shape of the ELSE-IF is not regular");
+            case 2 -> System.out.println(lineNumber +
+                    "nd line: The shape of the ELSE-IF is not regular");
+            case 3 -> System.out.println(lineNumber +
+                    "rd line: The shape of the ELSE-IF is not regular");
+            default -> System.out.println(lineNumber +
+                    "th line: The shape of the ELSE-IF is not regular");
         }
     }
 
     public static void printElse() {
         switch (lineNumber) {
-            case 1 -> System.out.println(lineNumber + "st line: The shape of the ELSE is not regular");
-            case 2 -> System.out.println(lineNumber + "nd line: The shape of the ELSE is not regular");
-            case 3 -> System.out.println(lineNumber + "rd line: The shape of the ELSE is not regular");
-            default -> System.out.println(lineNumber + "th line: The shape of the ELSE is not regular");
+            case 1 -> System.out.println(lineNumber +
+                    "st line: The shape of the ELSE is not regular");
+            case 2 -> System.out.println(lineNumber +
+                    "nd line: The shape of the ELSE is not regular");
+            case 3 -> System.out.println(lineNumber +
+                    "rd line: The shape of the ELSE is not regular");
+            default -> System.out.println(lineNumber +
+                    "th line: The shape of the ELSE is not regular");
         }
     }
 
     public static void main(String fileName) {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader("src/main/java/ir/ac/kntu/" + fileName));
+            reader = new BufferedReader(new FileReader(
+                    "src/main/java/ir/ac/kntu/" + fileName));
             String line = reader.readLine();
 
             while (line != null) {
@@ -81,8 +91,9 @@ public class ConditionStileChecking {
                 printIf();
             } else {
                 ifMatcher = ifPattern.matcher(line);
-                if (!ifMatcher.find())
+                if (!ifMatcher.find()) {
                     printIf();
+                }
             }
         }
     }
@@ -105,8 +116,9 @@ public class ConditionStileChecking {
                 printElseIf();
             } else {
                 elseIfMatcher = elseIfPattern.matcher(line);
-                if (!elseIfMatcher.find())
+                if (!elseIfMatcher.find()) {
                     printElseIf();
+                }
             }
         }
     }
@@ -128,8 +140,9 @@ public class ConditionStileChecking {
                 printElse();
             } else {
                 elseMatcher = elsePattern.matcher(line);
-                if (!elseMatcher.find())
+                if (!elseMatcher.find()) {
                     printElse();
+                }
             }
         }
     }

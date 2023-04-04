@@ -7,7 +7,7 @@ import java.io.IOException;
 public class PackageFinder {
     private static int lineNumber = 1;
 
-    public static void print(){
+    public static void print() {
         switch (lineNumber) {
             case 2 -> System.out.println(lineNumber + "nd line: package not imported in the first line.");
             case 3 -> System.out.println(lineNumber + "rd line: package not imported in the first line.");
@@ -30,8 +30,7 @@ public class PackageFinder {
                     lineNumber++;
                     continue;
                 }
-                if (line.startsWith("package") && lineNumber != 1)
-                {
+                if (line.startsWith("package") && lineNumber != 1) {
                     packageFound = true;
                     break;
                 }
@@ -42,7 +41,8 @@ public class PackageFinder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (packageFound)
+        if (packageFound) {
             print();
+        }
     }
 }

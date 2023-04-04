@@ -139,11 +139,11 @@ public class NameChecking {
                 || line.trim().contains("String ")
                 || line.trim().contains("float ")) {
             variableName = LineManagement.variableNameExtractor(line);
-            if (variableName.length() < 2)
+            if (variableName.length() < 2) {
                 variablePrintSmall();
-
-            else if (!variableName.matches("[a-z][a-zA-Z0-9].*"))
+            } else if (!variableName.matches("[a-z][a-zA-Z0-9].*")) {
                 variablePrintNotCase();
+            }
         }
     }
 

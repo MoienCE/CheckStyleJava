@@ -9,10 +9,14 @@ public class IndentationChecking {
 
     public static void print() {
         switch (lineNumber) {
-            case 1 -> System.out.println(lineNumber + "st line: Empty space is not ordered");
-            case 2 -> System.out.println(lineNumber + "nd line: Empty space is not ordered");
-            case 3 -> System.out.println(lineNumber + "rd line: Empty space is not ordered");
-            default -> System.out.println(lineNumber + "th line: Empty space is not ordered");
+            case 1 -> System.out.println(lineNumber +
+                    "st line: Empty space is not ordered");
+            case 2 -> System.out.println(lineNumber +
+                    "nd line: Empty space is not ordered");
+            case 3 -> System.out.println(lineNumber +
+                    "rd line: Empty space is not ordered");
+            default -> System.out.println(lineNumber +
+                    "th line: Empty space is not ordered");
         }
     }
 
@@ -26,19 +30,23 @@ public class IndentationChecking {
             while (line != null) {
                 line = line.replaceAll("\".*\"", "");
                 line = line.replaceAll("'.'", "");
-                if (line.contains("}") && !line.trim().startsWith("}"))
+                if (line.contains("}") && !line.trim().startsWith("}")) {
                     print();
+                }
                 if (line.trim().startsWith("//")) {
                     line = reader.readLine();
                     lineNumber++;
                     continue;
                 }
-                if (line.contains("}"))
+                if (line.contains("}")) {
                     cCounter--;
-                if (!line.trim().equals(line) && !chekSpace(line, cCounter))
+                }
+                if (!line.trim().equals(line) && !chekSpace(line, cCounter)) {
                     print();
-                if (line.contains("{"))
+                }
+                if (line.contains("{")) {
                     cCounter++;
+                }
 
                 line = reader.readLine();
                 lineNumber++;
@@ -51,8 +59,9 @@ public class IndentationChecking {
 
     private static boolean chekSpace(String line, int cCounter) {
         for (int i = 0; i < cCounter * 4; i++) {
-            if (line.charAt(i) != ' ')
+            if (line.charAt(i) != ' ') {
                 return false;
+            }
         }
         return line.charAt(cCounter * 4) != ' ';
     }

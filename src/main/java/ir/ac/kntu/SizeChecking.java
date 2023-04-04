@@ -7,7 +7,7 @@ import java.io.IOException;
 public class SizeChecking {
     private static int lineNumber = 1;
 
-    public static void print(){
+    public static void print() {
         switch (lineNumber) {
             case 1 -> System.out.println(lineNumber + "st line: what a big line! more than 80 characters!!");
             case 2 -> System.out.println(lineNumber + "nd line: what a big line! more than 80 characters!!");
@@ -25,9 +25,9 @@ public class SizeChecking {
 
             while (line != null) {
 
-                if (line.length() > 80)
+                if (line.length() > 80) {
                     print();
-
+                }
                 line = reader.readLine();
                 lineNumber++;
             }
