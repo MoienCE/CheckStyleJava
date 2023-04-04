@@ -27,6 +27,7 @@ public class SizeChecking {
 
                 if (line.length() > 80) {
                     print();
+                    recommender(line);
                 }
                 line = reader.readLine();
                 lineNumber++;
@@ -35,5 +36,31 @@ public class SizeChecking {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void recommender(String line) {
+        String line1 = "";
+        String line2 = "";
+
+        for (int counter = line.length(); counter != 0; counter--) {
+            if (counter < 80){
+                if (line.charAt(counter) == '+'
+                        || line.charAt(counter) == '-'
+                        || line.charAt(counter) == '/'
+                        || line.charAt(counter) == '*'
+                        || line.charAt(counter) == '%'
+                        || line.charAt(counter) == '^'
+                        || line.charAt(counter) == '&'
+                        || line.charAt(counter) == '|'){
+                    line1 = line.substring(0, counter);
+                    line2 = line.substring(counter);
+                    break;
+                }
+            }
+        }
+        System.out.println("I suggest you use this template:");
+        System.out.println(line1.trim());
+        System.out.println(line2);
+        System.out.println();
     }
 }
