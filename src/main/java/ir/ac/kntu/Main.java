@@ -44,6 +44,5 @@ public class Main {
         System.out.print("\n---------------------\n");
         System.out.print("switch-case stile WARNINGS:\n");
         switchCaseChecking.main(fileName);
-
     }
 }

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class switchCaseChecking {
     private static int lineNumber = 1;
+    private static boolean defaultFound = false, inSwitch = false;
 
     public static void printSwitch() {
         switch (lineNumber) {
@@ -41,27 +42,7 @@ public class switchCaseChecking {
             default -> System.out.println(lineNumber + "th line: Case stile is not regular");
         }
     }
-
-
-
     public static void main(String fileName) {
-        Pattern switchFindPattern = Pattern.compile("switch *\\(");
-        Matcher switchFindMatcher;
-        Pattern switchPattern = Pattern.compile("switch ?\\(.*\\) ?\\{");
-        Matcher switchMatcher;
-
-        Pattern defaultFindPattern = Pattern.compile("default *:");
-        Matcher defaultFindMatcher;
-        Pattern defaultPattern = Pattern.compile("default: .*;");
-        Matcher defaultMatcher;
-
-        Pattern caseFindPattern = Pattern.compile("case *[a-zA-Z0-9]+ *:");
-        Matcher caseFindMatcher;
-        Pattern casePattern = Pattern.compile("case [a-zA-Z0-9]+: .*;");
-        Matcher caseMatcher;
-
-        boolean defaultFound = false, inSwitch = false;
-
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(
@@ -76,43 +57,11 @@ public class switchCaseChecking {
                     lineNumber++;
                     continue;
                 }
-                switchFindMatcher = switchFindPattern.matcher(line);
-                if (switchFindMatcher.find()) {
-                    //********(switch stile check)*********//
-                    int i = 0;
-                    while (line.trim().charAt(i) != '{') {
-                        i++;
-                    }
-                    String str = line.trim().substring(0, i + 1);
-                    if (!line.trim().equals(str)) {
-                        printSwitch();
-                    } else {
-                        switchMatcher = switchPattern.matcher(line);
-                        if (!switchMatcher.find())
-                            printSwitch();
-                    }
-                    inSwitch = true;
-                }
-                //**********(case stile check)**********//
-                caseFindMatcher = caseFindPattern.matcher(line);
-                if (caseFindMatcher.find()){
-                    caseMatcher = casePattern.matcher(line);
-                    if (!caseMatcher.find())
-                        printCase();
-                }
-                //********(default stile check)*********//
-                defaultFindMatcher = defaultFindPattern.matcher(line);
-                if (defaultFindMatcher.find()){
-                    defaultFound = true;
-                    defaultMatcher = defaultPattern.matcher(line);
-                    if (!defaultMatcher.find())
-                        printDefault();
-                }
-                //**********(default found?)***********//
+                switchStileCheck(line);
+                caseStileCheck(line);
+                defaultStileCheck(line);
                 if (line.contains("}") && !defaultFound && inSwitch)
                     printDefaultNF();
-
-                //********(closed block check)*********//
                 if (line.contains("}") && inSwitch){
                     if (!(line.trim().equals("}")))
                         printSwitch();
@@ -125,6 +74,52 @@ public class switchCaseChecking {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    }
+    public static void switchStileCheck(String line){
+        Pattern switchFindPattern = Pattern.compile("switch *\\(");
+        Matcher switchFindMatcher;
+        Pattern switchPattern = Pattern.compile("switch ?\\(.*\\) ?\\{");
+        Matcher switchMatcher;
+        switchFindMatcher = switchFindPattern.matcher(line);
+        if (switchFindMatcher.find()) {
+            int i = 0;
+            while (line.trim().charAt(i) != '{') {
+                i++;
+            }
+            String str = line.trim().substring(0, i + 1);
+            if (!line.trim().equals(str)) {
+                printSwitch();
+            } else {
+                switchMatcher = switchPattern.matcher(line);
+                if (!switchMatcher.find())
+                    printSwitch();
+            }
+            inSwitch = true;
+        }
+    }
+    public static void caseStileCheck(String line){
+        Pattern caseFindPattern = Pattern.compile("case *[a-zA-Z0-9]+ *:");
+        Matcher caseFindMatcher;
+        Pattern casePattern = Pattern.compile("case [a-zA-Z0-9]+: .*;");
+        Matcher caseMatcher;
+        caseFindMatcher = caseFindPattern.matcher(line);
+        if (caseFindMatcher.find()){
+            caseMatcher = casePattern.matcher(line);
+            if (!caseMatcher.find())
+                printCase();
+        }
+    }
+    public static void defaultStileCheck(String line){
+        Pattern defaultFindPattern = Pattern.compile("default *:");
+        Matcher defaultFindMatcher;
+        Pattern defaultPattern = Pattern.compile("default: .*;");
+        Matcher defaultMatcher;
+        defaultFindMatcher = defaultFindPattern.matcher(line);
+        if (defaultFindMatcher.find()){
+            defaultFound = true;
+            defaultMatcher = defaultPattern.matcher(line);
+            if (!defaultMatcher.find())
+                printDefault();
+        }
     }
 }

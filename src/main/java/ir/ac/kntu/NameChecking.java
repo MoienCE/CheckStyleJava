@@ -28,76 +28,6 @@ public class NameChecking {
         }
     }
 
-    public static void main(String fileName) {
-        Pattern methodPattern = Pattern.compile("public static [A-Za-z]+ [A-Za-z]+");
-        Matcher methodMatcher;
-        lineNumber = 1;
-        String className, methodName, variableName;
-
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader("src/main/java/ir/ac/kntu/" + fileName));
-            String line = reader.readLine();
-
-            while (line != null) {
-                line = line.replaceAll("\".*\"", "");
-                line = line.replaceAll("'.'", "");
-                if (line.trim().startsWith("//")) {
-                    line = reader.readLine();
-                    lineNumber++;
-                    continue;
-                }
-                methodMatcher = methodPattern.matcher(line);
-                if (line.trim().startsWith("public class")) { //********(class?)********//
-                    int j = 13;
-                    while (line.charAt(j) != '{' && line.charAt(j) != ' ') {
-                        j++;
-                    }
-                    className = line.substring(13, j);
-
-                    if (className.length() < 2) {
-                        classPrintSmall();
-                    }
-                    if (!className.matches("[A-Z][a-zA-Z0-9].*")) {
-                        classPrintNotCase();
-                    }
-                } else if (methodMatcher.find()) { //********(method?)********//
-                    methodName = LineManagement.methodNameExtractor(line);
-                    if (methodName.length() < 2) {
-                        methodPrintSmall();
-                        return;
-                    }
-                    if (!methodName.matches("^[a-z]+[A-Za-z0-9]+")) {
-                        methodPrintNotCase();
-                    }
-                } else if (line.trim().startsWith("int")
-                        || line.trim().startsWith("double")
-                        || line.trim().startsWith("byte")
-                        || line.trim().startsWith("long")
-                        || line.trim().startsWith("char")
-                        || line.trim().startsWith("boolean")
-                        || line.trim().startsWith("String")
-                        || line.trim().startsWith("float")) { //********(variable?)********//
-                    variableName = LineManagement.variableNameExtractor(line);
-                    if (variableName.length() < 2)
-                        variablePrintSmall();
-
-                    else if (!variableName.matches("[a-z][a-zA-Z0-9].*"))
-                        variablePrintNotCase();
-
-                }
-
-                line = reader.readLine();
-                lineNumber++;
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    //*******************(method naming)*******************//
     public static void methodPrintNotCase() {
         switch (lineNumber) {
             case 1 -> System.out.println(lineNumber + "st line: method name is not lowerCamelCase.");
@@ -134,4 +64,87 @@ public class NameChecking {
             default -> System.out.println(lineNumber + "th line: variable name is lower than 2 characters.");
         }
     }
+
+    public static void main(String fileName) {
+        lineNumber = 1;
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader("src/main/java/ir/ac/kntu/" + fileName));
+            String line = reader.readLine();
+
+            while (line != null) {
+                line = line.replaceAll("\".*\"", "");
+                line = line.replaceAll("'.'", "");
+                if (line.trim().startsWith("//")) {
+                    line = reader.readLine();
+                    lineNumber++;
+                    continue;
+                }
+                methodCheck(line);
+                classCheck(line);
+                variableCheck(line);
+
+                line = reader.readLine();
+                lineNumber++;
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void classCheck(String line) {
+        String className;
+        if (line.trim().startsWith("public class")) {
+            int j = 13;
+            while (line.charAt(j) != '{' && line.charAt(j) != ' ') {
+                j++;
+            }
+            className = line.substring(13, j);
+
+            if (className.length() < 2) {
+                classPrintSmall();
+            }
+            if (!className.matches("[A-Z][a-zA-Z0-9].*")) {
+                classPrintNotCase();
+            }
+        }
+    }
+
+    private static void methodCheck(String line) {
+        Pattern methodPattern = Pattern.compile("public static [A-Za-z]+ [A-Za-z]+");
+        Matcher methodMatcher = methodPattern.matcher(line);
+        String methodName;
+        if (methodMatcher.find()) {
+            methodName = LineManagement.methodNameExtractor(line);
+            if (methodName.length() < 2) {
+                methodPrintSmall();
+                return;
+            }
+            if (!methodName.matches("^[a-z]+[A-Za-z0-9]+")) {
+                methodPrintNotCase();
+            }
+        }
+    }
+
+    private static void variableCheck(String line) {
+        String variableName;
+        if (line.trim().contains("int ")
+                || line.trim().contains("double ")
+                || line.trim().contains("byte ")
+                || line.trim().contains("long ")
+                || line.trim().contains("char ")
+                || line.trim().contains("boolean ")
+                || line.trim().contains("String ")
+                || line.trim().contains("float ")) {
+            variableName = LineManagement.variableNameExtractor(line);
+            if (variableName.length() < 2)
+                variablePrintSmall();
+
+            else if (!variableName.matches("[a-z][a-zA-Z0-9].*"))
+                variablePrintNotCase();
+        }
+    }
+
 }

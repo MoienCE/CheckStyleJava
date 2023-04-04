@@ -10,9 +10,8 @@ public class LineManagement {
     }
 
     public static String variableNameExtractor(String line) {
-        String variableName;
-        variableName = line.trim().replaceAll("^[a-z\\[\\]A-Z]+ ", "");
-        variableName = variableName.replaceAll("[ =].*", "");
+        String variableName = line.trim().replaceAll(".*(int|float|double|byte|long|char|boolean|String) ", "");
+        variableName = variableName.replaceAll("[ =)].*", "");
         return variableName;
     }
 }

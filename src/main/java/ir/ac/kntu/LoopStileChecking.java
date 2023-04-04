@@ -34,36 +34,11 @@ public class LoopStileChecking {
                     lineNumber++;
                     continue;
                 }
-                if (line.trim().startsWith("while")) { //******(while?)******//
-                    int i = 0;
-                    while (line.trim().charAt(i) != '{') {
-                        i++;
-                    }
-                    String str = line.trim().substring(0, i + 1);
-                    if (!line.trim().equals(str)) {
-                        print();
-                    } else {
-                        Pattern p = Pattern.compile("while ?\\(.+\\) ?\\{");
-                        Matcher m = p.matcher(line);
-                        if (!m.find())
-                            print();
-                    }
-
+                if (line.trim().startsWith("while")) {
+                    whileCheck(line);
                 }
-                else if (line.trim().startsWith("for")) { //******(for?)*****//
-                    int i = 0;
-                    while (line.trim().charAt(i) != '{') {
-                        i++;
-                    }
-                    String str = line.trim().substring(0, i + 1);
-                    if (!line.trim().equals(str)) {
-                        print();
-                    } else {
-                        Pattern p = Pattern.compile("for[ ]?\\(.+\\)[ ]?\\{");
-                        Matcher m = p.matcher(line);
-                        if (!m.find())
-                            print();
-                    }
+                else if (line.trim().startsWith("for")) {
+                    forCheck(line);
                 }
                 line = reader.readLine();
                 lineNumber++;
@@ -72,6 +47,35 @@ public class LoopStileChecking {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    }
+    public static void whileCheck(String line){
+        int i = 0;
+        while (line.trim().charAt(i) != '{') {
+            i++;
+        }
+        String str = line.trim().substring(0, i + 1);
+        if (!line.trim().equals(str)) {
+            print();
+        } else {
+            Pattern p = Pattern.compile("while ?\\(.+\\) ?\\{");
+            Matcher m = p.matcher(line);
+            if (!m.find())
+                print();
+        }
+    }
+    public static void forCheck(String line){
+        int i = 0;
+        while (line.trim().charAt(i) != '{') {
+            i++;
+        }
+        String str = line.trim().substring(0, i + 1);
+        if (!line.trim().equals(str)) {
+            print();
+        } else {
+            Pattern p = Pattern.compile("for ?\\(.+\\) ?\\{");
+            Matcher m = p.matcher(line);
+            if (!m.find())
+                print();
+        }
     }
 }
