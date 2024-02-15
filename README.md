@@ -1,31 +1,15 @@
-# سامانه Courses 
-[Documentation](https://docs.google.com/document/d/1aGKJx90JMwXqh_yXCuZlBNGL3UVjunAvVK9wQJ6WTiY/edit)
-
 <ul>
 <li>
-clone in your computer: 
-
-```
-git clone your_repo_url
-cd your_repo_dir
-```
+Is your code clean?
 </li>
 
 <li>
-run tests from terminal:
-
-```
-mvn clean test
-```
+First, select your file (make sure it is in Java code format), then clean it with me!
 </li>
 
 <li>
-push changes to the repository:
+It was a academic project where not only the person who did the project should be familiar with all the rules of clean code, but also know how to work with the file and analyze it well.
 
-```
-git add . 
-git commit -m "commit message"
-git push
-```
+  I hope that by sharing this project, I have helped you in these areas. ♥
 </li>
 </ul>
